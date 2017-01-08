@@ -18,6 +18,16 @@
     <script type="text/javascript" src="raphael.icons.min.js"></script>
     <script type="text/javascript" src="wheelnav.min.js"></script>
     <style>
+    body {
+        background-color: #E7E7E7;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+    
+    #divWheel {
+        width: 550px;
+        height: 550px;
+    }
+    
     #wheelDiv {
         height: 400px;
         width: 400px;
@@ -47,14 +57,12 @@
     <script type="text/javascript">
     window.onload = function() {
 
-        var wheel = new wheelnav("wheelDiv");
+        var wheel = new wheelnav("wheelDiv"); //This is the place for code snippets from the documentation -> http://wheelnavjs.softwaretailoring.net/documentation.html
+        wheel.createWheel(["0", "1", "2", "3"]);
+        wheel.navigateWheel(3);
+        var wheel = new wheelnav("divWheel");
 
-        //This is the place for code snippets from the documentation -> http://wheelnavjs.softwaretailoring.net/documentation.html
-
-
-
-        wheel.navigateWheel(2);
-
+        wheel.navigateWheel(3);
         //Insert generated JavaScript code from here -> http://pmg.softwaretailoring.net
 
     };
@@ -62,13 +70,21 @@
 </head>
 
 <body>
-    <div id="wheelDiv" data-wheelnav data-wheelnav-slicepath="WheelSlice" data-wheelnav-colors="grey,#353f47,#4bcaff,#929292">
-        <div data-wheelnav-navitemicon="idea">idea</div>
-        <div data-wheelnav-navitemicon="star">star</div>
-        <div data-wheelnav-navitemicon="fork">fork</div>
-        <div data-wheelnav-navitemicon="$">donate</div>
+    <div id="divWheel" data-wheelnav-marker data-wheelnav-markerpath="DropMarker" data-wheelnav data-wheelnav-spreader data-wheelnav-spreaderradius="30" data-wheelnav-colors="#515f67,#4bcaff,#515f67,#4bcaff" data-wheelnav-titlewidth="100">
+        <div data-wheelnav-navitemtext="Интернет-магазин">
+            <p>В отличие от сайта-витрины, где клиент может увидеть наличие всех товаров, с помощью интернет-магазина клиент может еще и сделать заказ, выбрать вариант расчета, способ получения заказа и получить счет на оплату. Такой сайт должен быть удобным и функциональным, чтобы посетитель мог легко найти то, что ему нужно, отправить товар в корзину и оформить покупку в несколько кликов. Интернет-магазин существенно уменьшит Ваши расходы, так как не надо арендовать помещение для магазина, не надо платить заработную плату сотрудникам.</p>
+        </div>
+        <div data-wheelnav-navitemtext="Промо-сайт">
+            <p>Прекрасным рекламным инструментом может служить промо-сайт. Особенно, если Вы планируете провести рекламную компанию отдельного товара или услуги (мероприятия...). Структура промо-сайта сама по себе должна выполнять функцию рекламного проспекта или буклета, и привлекать внимание клиентов. Также на таком сайте можно поместить ту информацию, которая не поместится на странице журнала, в радиосообщении, телевизионном ролике. Объем промо-сайта – до 10 страниц, на которых можно разместить данные о компании, направление деятельности, продвигаемую услугу, контактные данные.</p>
+        </div>
+        <div data-wheelnav-navitemtext="Лендинг">
+            <p>Целевая страница (англ. landing page, также «посадочная страница») — веб-страница, основной задачей которой является сбор контактных данных целевой аудитории. Используется для усиления эффективности рекламы, увеличения аудитории. Целевая страница обычно содержит информацию о товаре или услуге.</p>
+        </div>
+        <div data-wheelnav-navitemtext="Сайт-визитка">
+            <p>Именно тот набор информации, распространение которой в Интернете, несомненно, полезно как начинающим, так и акулам бизнеса. Это своеобразный справочник о фирме, который содержит все необходимые контактные данные и информацию о деятельности компании. Это должна быть краткая, четкая и самая важная информация о Вас, Вашей сфере деятельности, интересах. Не стоит перегружать Ваш сайт-визитку информацией, которая возможно не понадобится потенциальному клиенту или партнеру.</p>
+        </div>
     </div>
+    <div id="wheelDiv"></div>
     <!-- Insert generated HTML5 code from here -> http://pmg.softwaretailoring.net -->
-</body>
 
 </html>
