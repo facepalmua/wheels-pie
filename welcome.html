@@ -14,6 +14,10 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js">
+    </script>
+    <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="raphael.min.js"></script>
     <script type="text/javascript" src="raphael.icons.min.js"></script>
     <script type="text/javascript" src="wheelnav.min.js"></script>
@@ -21,50 +25,6 @@
     body {
         background-color: #E7E7E7;
         font-family: Helvetica, Arial, sans-serif;
-    }
-    
-    header {
-        font-size: x-large;
-        text-align: center;
-        background-color: #555;
-        color: #ddd;
-        padding: 5px;
-        font-family: Helvetica, sans-serif;
-        margin-bottom: 50px;
-    }
-    
-    header a {
-        background-color: #ddd;
-        color: #555;
-        text-decoration: none;
-        padding: 0 3px 0 3px;
-    }
-    
-    header a:hover {
-        background-color: #555;
-        color: #ddd;
-        text-decoration: underline;
-    }
-    
-    footer {
-        text-align: center;
-        background-color: #555;
-        color: #ddd;
-        padding: 5px;
-        margin-top: 50px;
-    }
-    
-    footer a {
-        background-color: #ddd;
-        color: #555;
-        text-decoration: none;
-        padding: 0 3px 0 3px;
-    }
-    
-    footer a:hover {
-        background-color: #555;
-        color: #ddd;
-        text-decoration: underline;
     }
     
     #wheelDiv {
@@ -76,6 +36,13 @@
     #wheelDiv>svg {
         height: 100%;
         width: 100%;
+    }
+    
+    .click {
+        display: block;
+        border-bottom: 5px black dashed;
+        transition: top 1s ease-out 0.5s;
+        opacity: 0;
     }
     
     @media (max-width: 600px) {
@@ -94,7 +61,7 @@
     
     h4 {
         width: 200px;
-        1height: 28px;
+        height: 28px;
         background-color: #CD853F;
         opacity: 0.5;
     }
@@ -114,25 +81,51 @@
 
 
         wheel = new wheelnav('wheelDiv');
-        wheel.hoverPercent = 0.9;
-        wheel.selectedPercent = 1.1;
-        wheel.wheelRadius = wheel.wheelRadius * 0.8;
-        wheel.colors = colorpalette.gamebookers;
-        wheel.createWheel(["ЖМИ", "1", "2", '3']);
-        wheel.navItems[0].navigateFunction = function() {
-            document.getElementById('text').style.display = 'none';
-        };
-        wheel.navItems[1].navSlice.mousedown(function() {
+        wheel.slicePathFunction = slicePath().CogBasePieSlice;
+        wheel.sliceHoverPathFunction = slicePath().CogSlice;
+        wheel.sliceSelectedPathFunction = slicePath().CogSlice;
+        wheel.sliceHoverTransformFunction = sliceTransform().RotateTitleTransform;
+        wheel.sliceSelectedTransformFunction = sliceTransform().MoveMiddleTransform;
+        wheel.animatetime = 900;
+        // wheel.colors = colorpalette.gamebookers;
+        wheel.colors = ['#515f67', "#4bcaff"];
+        wheel.createWheel(["Магазин", "Корпоративный", "Лендинг", "Визитка"]);
 
+
+
+
+        wheel.navItems[0].navigateFunction = function() {
+
+            $(".tab2").addClass("active"); //добавляем класс текущей (нажатой)
+            $(".tab3").addClass("active"); //добавляем класс текущей (нажатой)
+            $(".tab4").addClass("active"); //добавляем класс текущей (нажатой)
+
+            $(".tab1").removeClass("active"); //добавляем класс текущей (нажатой)
+        };
+        wheel.navItems[1].navSlice.mousedown
+(function() {
+            $(".tab1").addClass("active"); //добавляем класс текущей (нажатой)
+            $(".tab3").addClass("active"); //добавляем класс текущей (нажатой)
+            $(".tab4").addClass("active"); //добавляем класс текущей (нажатой)
+
+            $(".tab2").removeClass("active"); //добавляем класс текущей (нажатой)
         });
         wheel.navItems[2].navSlice.mousedown(function() {
+            $(".tab1").addClass("active"); //добавляем класс текущей (нажатой)
+            $(".tab2").addClass("active"); //добавляем класс текущей (нажатой)
+            $(".tab4").addClass("active"); //добавляем класс текущей (нажатой)
 
+            $(".tab3").removeClass("active"); //добавляем класс текущей (нажатой)
         });
         wheel.navItems[3].navSlice.mousedown(function() {
+            $(".tab2").addClass("active"); //добавляем класс текущей (нажатой)
+            $(".tab3").addClass("active"); //добавляем класс текущей (нажатой)
+            $(".tab1").addClass("active"); //добавляем класс текущей (нажатой)
 
+            $(".tab4").removeClass("active"); //добавляем класс текущей (нажатой)
         });
         wheel.navigateWheel(2);
-        wheel.hoverPercent = 0.9;
+        wheel.hoverPercent = 0.5;
         wheel.selectedPercent = 1.1;
 
         //Insert generated JavaScript code from here -> http://pmg.softwaretailoring.net
@@ -142,29 +135,27 @@
 </head>
 
 <body>
-    <header>
-        <p>
-            Welcome by <a href="http://wheelnavjs.softwaretailoring.net" target="_blank">wheelnav.js</a>
-        </p>
-    </header>
     <div id="wheelDiv">
-        <div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae tempora esse expedita nam velit ex, accusantium quae nulla sit, possimus dicta optio consequatur quaerat nesciunt excepturi rerum explicabo ut animi.</p>
-        </div>
     </div>
-    <input type="button" id="hider" value="Нажми шоб показати текст" />
-    <div id="text">Текст</div>
+    <p>---------------------------------------</p>
+    <br>
+    <br>
+    <br>
+    <div id="text">
+        <span class="tab tab1 "><p>В отличие от сайта-витрины, где клиент может увидеть наличие всех товаров, с помощью интернет-магазина клиент может еще и сделать заказ, выбрать вариант расчета, способ получения заказа и получить счет на оплату. Такой сайт должен быть удобным и функциональным, чтобы посетитель мог легко найти то, что ему нужно, отправить товар в корзину и оформить покупку в несколько кликов. Интернет-магазин существенно уменьшит Ваши расходы, так как не надо арендовать помещение для магазина, не надо платить заработную плату сотрудникам.</p></span>
+        <span class="tab tab2 active"><p>Более серьезным видом представительства компании в Интернете являются корпоративные сайты. Это обязательный инструмент успешного бизнеса любой компании. В первую очередь, сайты подобного рода помогают формировать позитивный имидж компании, привлекают новых заказчиков, которые могут не знать о существовании Вашей фирмы на рынке, и, соответственно, расширяют рынок сбыта компании. С помощью корпоративного сайта клиенты и заказчики получают информацию о ценах на товары и услуги в удобном виде. Значительно увеличить прибыль Вы сможете путем предоставления возможности делать заказы Вашим клиентам прямо в Интернете, на Вашей страничке.</p></span>
+        <span class="tab tab3 active"><p>Целевая страница (англ. landing page, также «посадочная страница») — веб-страница, основной задачей которой является сбор контактных данных целевой аудитории. Используется для усиления эффективности рекламы, увеличения аудитории. Целевая страница обычно содержит информацию о товаре или услуге.</p></span>
+        <span class="tab tab4 active"><p>Именно тот набор информации, распространение которой в Интернете, несомненно, полезно как начинающим, так и акулам бизнеса. Это своеобразный справочник о фирме, который содержит все необходимые контактные данные и информацию о деятельности компании. Это должна быть краткая, четкая и самая важная информация о Вас, Вашей сфере деятельности, интересах. Не стоит перегружать Ваш сайт-визитку информацией, которая возможно не понадобится потенциальному клиенту или партнеру.</p></span>
+    </div>
     <script>
     // в этой задаче неважно, как именно прятать элемент
     // например через style.display:
     document.getElementById('hider').onclick = function() {
         document.getElementById('text').style.display = 'block';
+
     }
     </script>
     <!-- Insert generated HTML5 code from here -> http://pmg.softwaretailoring.net -->
-    <footer>
-        <p>&copy; 2014-2016 <a href="http://softwaretailoring.net" target="_blank">softwaretailoring.net</a></p>
-    </footer>
 </body>
 
 </html>
